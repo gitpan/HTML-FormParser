@@ -1,5 +1,5 @@
 #  (C) 2002  Simon Drabble
-#  simon@eskimo.com   03/22/02
+#  sdrabble@cpan.org   03/22/02
 
 #  $Id: FormParser.pm,v 1.2 2002/05/02 01:54:41 simon Exp $
 
@@ -12,7 +12,7 @@ use HTML::Parser;
 
 use strict;
 
-our $VERSION = 0.10;
+our $VERSION = 0.11;
 
 
 # The tags we're interested in.
@@ -24,7 +24,7 @@ sub start
 {
 	my ($self, $tag, $attr, $attrseq, $origtext) = @_;
 
-	return unless grep { $_ eq $tag } @tag_names;
+	return unless grep { $_ eq lc($tag) } @tag_names;
 
 	if (ref($self->{"${tag}_start_callback"}) eq 'CODE') {
 		&{$self->{"${tag}_start_callback"}}($attr, $origtext);
@@ -42,7 +42,7 @@ sub end
 {
 	my ($self, $tag, $origtext) = @_;
 
-	return unless grep { $_ eq $tag } @tag_names;
+	return unless grep { $_ eq lc($tag) } @tag_names;
 
 	if (ref($self->{"${tag}_callback"}) eq 'CODE') {
 		&{$self->{"${tag}_callback"}}($origtext);
@@ -155,7 +155,7 @@ for example it should read from a stream or filehandle.
 
 =head1 AUTHOR
 
-Simon Drabble  E<lt>simon@eskimo.comE<gt>
+Simon Drabble  E<lt>sdrabble@cpan.orgE<gt>
 (C) 2002  Simon Drabble
 
 This software is released under the same terms as perl.

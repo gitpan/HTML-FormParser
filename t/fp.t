@@ -26,7 +26,7 @@ $formbits1 = '';
 
 $formbits2 = '';
 
-$form_text = "<form id='foo' name='bar' action='frubnitz' method='post'>";
+$form_text = "<FORM id='foo' name='bar' action='frubnitz' method='post'>";
 $inp1_text = "<input type='text' name='a_text_input' value='charpooze'>";
 $inp2_text = "<input type='hidden' name='a_hidden_input' value='scrofe'>";
 
@@ -49,7 +49,7 @@ $inp2_text
 sub form_callback
 {
   my ($attr, $orig) = @_;
-	$formbits1 = "<form";
+	$formbits1 = "<FORM";
 	for (qw(id name action method)) {
 		$formbits1 .= " $_='$attr->{$_}'";
 	}
